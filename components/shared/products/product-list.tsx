@@ -22,7 +22,7 @@ const ProductList = ({
           ))}
         </div>
       ) : (
-        <div>No products found</div>
+        <div className="text-red-500">No products found</div>
       )}
     </div>
   );
