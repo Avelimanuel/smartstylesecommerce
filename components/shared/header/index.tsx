@@ -18,9 +18,9 @@ const Header = () => {
               height={40}
               alt={`${APP_NAME} logo`}
               priority={true}
-              className="rounded-full shadow-md"
+              className="hidden lg:inline-block rounded-full shadow-md"
             />
-            <span className="hidden lg:block text-2xl font-bold text-orange-600">
+            <span className=" lg:block text-2xl font-bold text-orange-600">
               {APP_NAME}
             </span>
           </Link>
@@ -32,7 +32,11 @@ const Header = () => {
           <ThemeToggle />
 
           {/* Cart Button */}
-          <Button asChild variant="ghost" className="flex items-center space-x-2">
+          <Button
+            asChild
+            variant="ghost"
+            className="flex items-center space-x-2"
+          >
             <Link href="/cart">
               <ShoppingCart size={20} />
               <span className="hidden md:block">Cart</span>

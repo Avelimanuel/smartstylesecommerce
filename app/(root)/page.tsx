@@ -5,7 +5,7 @@ const delay = (ms: any) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const Homepage = async () => {
   const latestProducts = await getLatestProducts()
-  await delay(2000);
+  await delay(1000);
   return (
     <>
       <ProductList data={latestProducts} title="New Arrivals" limit={4} />
