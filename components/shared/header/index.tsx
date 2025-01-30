@@ -12,14 +12,14 @@ const Header = () => {
         {/* Logo Section */}
         <div className="flex items-center">
           <Link href="/" className="flex items-center space-x-3">
-            <Image
+            {/* <Image
               src="/images/smartstyleslogo.jpeg"
               width={40}
               height={40}
               alt={`${APP_NAME} logo`}
               priority={true}
               className="hidden lg:inline-block rounded-full shadow-md"
-            />
+            /> */}
             <span className=" lg:block text-2xl font-bold text-orange-600">
               {APP_NAME}
             </span>
