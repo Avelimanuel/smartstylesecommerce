@@ -1,11 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -32,9 +25,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           <h2 className="font-semibold text-sm">{product.name}</h2>
         </Link>
         <div className="flex-between gap-4">
-          <Button className="bg-blue-600 hover:bg-blue-700">
-            Add to Cart
-          </Button>
+          <Button className="bg-blue-600 hover:bg-blue-700">Add to Cart</Button>
           {product.stock > 0 ? (
             <h1 className="font-bold">Ksh. {product.price}</h1>
           ) : (

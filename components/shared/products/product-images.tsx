@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
-import { cn } from "@/lib/utils";
 const ProductImages = ({ images }: { images: string[] }) => {
   const [currentImage, setCurrentImage] = useState(0);
 
@@ -17,7 +16,7 @@ const ProductImages = ({ images }: { images: string[] }) => {
         />
         <div className="flex gap-2 overflow-x-auto max-w-full px-2">
           {images.map((image, index) => (
-            <div>
+            <div key={index}>
               <button
                 key={index}
                 onClick={() => setCurrentImage(index)}

@@ -3,14 +3,17 @@ import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import Image from "next/image";
 import ProductImages from "@/components/shared/products/product-images";
 
-const SingleItemDetails = async ({ params }: { params: { slug: string } }) => {
+interface ProductPageProps {
+  params: { slug: string };
+}
+
+const SingleItemDetails = async ({ params }: ProductPageProps) => {
   const { slug } = await params;
   const singleItem = await getSingleProductByslug(slug);
 
-  if (!singleItem) notFound();
+  if (!singleItem) return notFound();
 
   return (
     <section className="container mx-auto px-4 py-10">
@@ -18,7 +21,7 @@ const SingleItemDetails = async ({ params }: { params: { slug: string } }) => {
         {/* Images Section */}
         <div className="lg:col-span-2">
           <div className="relative w-full h-[300px] md:h-[400px]">
-            <ProductImages images={singleItem.images}/>
+            <ProductImages images={singleItem.images} />
           </div>
         </div>
 
