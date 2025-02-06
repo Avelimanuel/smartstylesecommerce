@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { APP_NAME } from "@/lib/constants";
 import ThemeToggle from "./theme-toggle";
+import UserButtton from "./user-button";
 
 const Header = () => {
   return (
@@ -43,12 +44,8 @@ const Header = () => {
           </Button>
 
           {/* Sign-In Button */}
-          <Button asChild className="flex items-center space-x-2">
-            <Link href="/sign-in">
-              <UserIcon size={20} />
-              <span>Sign In</span>
-            </Link>
-          </Button>
+          
+          <UserButtton/>
         </div>
       </div>
     </header>
