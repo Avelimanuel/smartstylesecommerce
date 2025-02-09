@@ -25,7 +25,14 @@ const ProductCard = ({ product }: { product: Product }) => {
           <h2 className="font-semibold text-sm">{product.name}</h2>
         </Link>
         <div className="flex-between gap-4">
-          <Button className="bg-blue-600 hover:bg-blue-700">Add to Cart</Button>
+          {product.stock > 0 ? (
+            <Button className="bg-blue-600 hover:bg-blue-700">
+              Add to Cart
+            </Button>
+          ) : (
+            ""
+          )}
+
           {product.stock > 0 ? (
             <h1 className="font-bold">Ksh. {product.price}</h1>
           ) : (
