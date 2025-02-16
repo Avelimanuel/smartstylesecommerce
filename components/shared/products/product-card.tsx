@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { Product } from "@/types";
+import AddToCart from "./add-to-cart";
 
 const ProductCard = ({ product }: { product: Product }) => {
   return (
@@ -26,9 +27,16 @@ const ProductCard = ({ product }: { product: Product }) => {
         </Link>
         <div className="flex-between gap-4">
           {product.stock > 0 ? (
-            <Button className="bg-blue-600 hover:bg-blue-700">
-              Add to Cart
-            </Button>
+            <AddToCart
+              item={{
+                productId: product.id,
+                name: product.name,
+                slug: product.slug,
+                price: product.price,
+                qty: 1,
+                image: product.images![0],
+              }}
+            />
           ) : (
             ""
           )}

@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { string } from "zod";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -33,4 +34,21 @@ export function formatErrors(error: any) {
       ? error.message
       : JSON.stringify(error.message);
   }
+}
+
+//Round decimal number to a whole number
+
+export function roundToWholeNumber(value: number | string) {
+  if (value === null || value === undefined || value === "") {
+    console.error("Invalid value passed to roundToWholeNumber:", value);
+    return 0; // Default to 0 instead of throwing an error
+  }
+
+  const num = Number(value);
+  if (isNaN(num)) {
+    console.error("roundToWholeNumber received NaN!", value);
+    return 0;
+  }
+
+  return Math.round(num);
 }

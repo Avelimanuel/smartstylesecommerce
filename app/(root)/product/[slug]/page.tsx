@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import ProductImages from "@/components/shared/products/product-images";
+import AddToCart from "@/components/shared/products/add-to-cart";
 
 interface ProductPageProps {
   params: { slug: string };
@@ -60,9 +61,16 @@ const SingleItemDetails = async ({ params }: ProductPageProps) => {
                 )}
               </div>
               {singleItem.stock > 0 && (
-                <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                  Add to Cart
-                </Button>
+                <AddToCart
+                  item={{
+                    productId: singleItem.id,
+                    name: singleItem.name,
+                    slug: singleItem.slug,
+                    price: Number(singleItem.price),
+                    qty: 1,
+                    image: singleItem.images![0],
+                  }}
+                />
               )}
             </CardContent>
           </Card>
