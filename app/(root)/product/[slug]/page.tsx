@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import ProductImages from "@/components/shared/products/product-images";
 import AddToCart from "@/components/shared/products/add-to-cart";
+import { getMycartItems } from "@/lib/actions/cartactions";
 
 interface ProductPageProps {
   params: { slug: string };
@@ -15,6 +16,7 @@ const SingleItemDetails = async ({ params }: ProductPageProps) => {
   const singleItem = await getSingleProductByslug(slug);
 
   if (!singleItem) return notFound();
+  const cart = await getMycartItems();
 
   return (
     <section className="container mx-auto px-4 py-10">
@@ -62,6 +64,7 @@ const SingleItemDetails = async ({ params }: ProductPageProps) => {
               </div>
               {singleItem.stock > 0 && (
                 <AddToCart
+                  cart={cart}
                   item={{
                     productId: singleItem.id,
                     name: singleItem.name,
