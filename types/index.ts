@@ -3,6 +3,7 @@ import {
   insertProductSchema,
   insertedCartItemsSchema,
   cartItemSchema,
+  shippingAddressSchema
 } from "@/lib/validators";
 export type Product = z.infer<typeof insertProductSchema> & {
   id: string;
@@ -12,3 +13,4 @@ export type Product = z.infer<typeof insertProductSchema> & {
 
 export type Cart = z.infer<typeof insertedCartItemsSchema>;
 export type CartItem = z.infer<typeof cartItemSchema>;
+export type ShippingAddress = z.infer<typeof shippingAddressSchema>

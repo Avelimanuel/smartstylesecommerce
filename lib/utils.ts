@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { string } from "zod";
+import { number, string } from "zod";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -51,4 +51,21 @@ export function roundToWholeNumber(value: number | string) {
   }
 
   return Math.round(num);
+}
+
+const CURRENCY_FORMATTER = new Intl.NumberFormat("en-KE", {
+  currency: "KES",
+  style: "currency",
+  minimumFractionDigits: 0,
+});
+
+export function formatCurrency(amount:number | string | null){
+  if(typeof amount === 'number'){
+    return CURRENCY_FORMATTER.format(amount)
+  }else if(typeof amount === 'string'){
+    return CURRENCY_FORMATTER.format(Number(amount))
+  }else{
+    return NaN
+  }
+
 }
