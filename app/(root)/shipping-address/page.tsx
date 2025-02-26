@@ -5,6 +5,7 @@ import { redirect, } from "next/navigation";
 import { ShippingAddress } from "@/types";
 import { getUserById } from "@/lib/actions/users.actions";
 import Shippingaddressform from "./shipping-address-form";
+import Checkoutsteps from "@/components/shared/checkout-steps";
 
 export const metadata: Metadata = {
   title: "Shipping Address",
@@ -22,6 +23,7 @@ const ShippingAdressPage = async () => {
 
   return (
     <>
+    <Checkoutsteps current={1}/>
       <Shippingaddressform address={user.address as ShippingAddress} />
     </>
   );
