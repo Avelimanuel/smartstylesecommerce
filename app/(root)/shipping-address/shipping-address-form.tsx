@@ -5,7 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 import { shippingAddressSchema } from "@/lib/validators";
 import { useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ControllerRenderProps, useForm } from "react-hook-form";
+import { ControllerRenderProps, useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import {
   Form,
@@ -18,6 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Loader } from "lucide-react";
+import { updateUserAddress } from "@/lib/actions/users.actions";
 
 const Shippingaddressform = ({ address }: { address: ShippingAddress }) => {
   const router = useRouter();
@@ -28,9 +29,20 @@ const Shippingaddressform = ({ address }: { address: ShippingAddress }) => {
   });
 
   const [isPending, startTransition] = useTransition();
-  const onSubmit = (values) => {
-    console.log(values)
-    return;
+  const onSubmit: SubmitHandler<z.infer<typeof shippingAddressSchema>> = async (
+    values
+  ) => {
+    startTransition(async () => {
+      const res = await updateUserAddress(values);
+      if (!res.success) {
+        toast({
+          variant: "destructive",
+          description: res.message,
+        });
+        return;
+      }
+      router.push('/payment-method')
+    });
   };
   return (
     <div className="max-w-md mx-auto space-y-4">
@@ -160,13 +172,14 @@ const Shippingaddressform = ({ address }: { address: ShippingAddress }) => {
             />
           </div>
           <div className="flex gap-4">
-          <Button type="submit" disabled={isPending}>
-          {isPending ? (
-            <Loader className="w-4 h-4 animate-spin"/>
-          ) : (
-            <ArrowRight className="w-4 h-4"/>
-          )} Continue
-          </Button>
+            <Button type="submit" disabled={isPending}>
+              {isPending ? (
+                <Loader className="w-4 h-4 animate-spin" />
+              ) : (
+                <ArrowRight className="w-4 h-4" />
+              )}{" "}
+              Continue
+            </Button>
           </div>
         </form>
       </Form>

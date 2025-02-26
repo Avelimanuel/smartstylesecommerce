@@ -1,7 +1,7 @@
 import { auth } from "@/auth";
 import { getMycartItems } from "@/lib/actions/cartactions";
 import { Metadata } from "next";
-import { redirect } from "next/navigation";
+import { redirect, } from "next/navigation";
 import { ShippingAddress } from "@/types";
 import { getUserById } from "@/lib/actions/users.actions";
 import Shippingaddressform from "./shipping-address-form";
@@ -16,6 +16,7 @@ const ShippingAdressPage = async () => {
   const session = await auth();
   const userId = session?.user?.id;
   if (!userId) throw new Error("User id was not found");
+  
 
   const user = await getUserById(userId);
 
