@@ -4,6 +4,7 @@ import {
   shippingAddressSchema,
   signInFormSchema,
   signUpFormSchema,
+  paymentMethodSchema,
 } from "../validators";
 import { auth, signIn, signOut } from "@/auth";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
@@ -11,6 +12,7 @@ import { hashSync } from "bcrypt-ts-edge";
 import { prisma } from "@/db/prisma";
 import { formatErrors } from "../utils";
 import { ShippingAddress } from "@/types";
+import { z } from "zod";
 
 //Sign in users with credentials
 
@@ -99,6 +101,19 @@ export async function updateUserAddress(data: ShippingAddress) {
       success: true,
       message: "Shipping address updated successfully",
     };
+  } catch (error) {
+    return {
+      success: false,
+      message: formatErrors(error),
+    };
+  }
+}
+
+//Update a user's payment method
+export async function updateUserPaymentMethod(
+  data: z.infer<typeof paymentMethodSchema>
+) {
+  try {
   } catch (error) {
     return {
       success: false,

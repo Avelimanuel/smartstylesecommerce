@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { PAYMENT_METHODS } from "./constants";
 
 export const insertProductSchema = z.object({
   name: z.string().min(3, "Product name must be at least 3 characters"),
@@ -71,3 +72,13 @@ export const shippingAddressSchema = z.object({
     .string()
     .min(4, "Landmark name must be atleast 4 characters long."),
 });
+
+//Schema for the payment method
+export const paymentMethodSchema = z
+  .object({
+    type: z.string().min(1, "Payment method is required"),
+  })
+  .refine((data) => PAYMENT_METHODS.includes(data.type), {
+    path: ["type"],
+    message: "Invalid payment method",
+  });
