@@ -85,6 +85,7 @@ export async function getUserById(userId: string) {
   if (!user) throw new Error("User not found");
   return user;
 }
+//Action to update a users shipping address
 export async function updateUserAddress(data: ShippingAddress) {
   try {
     const session = await auth();
@@ -109,11 +110,26 @@ export async function updateUserAddress(data: ShippingAddress) {
   }
 }
 
-//Update a user's payment method
+//Action to Update a user's payment method
 export async function updateUserPaymentMethod(
   data: z.infer<typeof paymentMethodSchema>
 ) {
   try {
+    const session = await auth();
+    const currentUser = await prisma.user.findFirst({
+      where: { id: session?.user?.id },
+    });
+    if (!currentUser) throw new Error("User Not Found");
+    const paymentmethod = paymentMethodSchema.parse(data);
+    //Update users payment method
+    await prisma.user.update({
+      where:{id:currentUser.id},
+      data:{paymentMethod:paymentmethod.type}
+    })
+    return {
+      success:true,
+      message:'Users payment method updated successfully'
+    }
   } catch (error) {
     return {
       success: false,
