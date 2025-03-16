@@ -7,7 +7,7 @@ import { convertToRegularJsobject } from "../utils";
 //Get the latest products
 export async function getLatestProducts() {
   const data = await prisma.product.findMany({
-    take: 4,
+    take: 6,
     orderBy: { createdAt: "desc" },
   });
   return convertToRegularJsobject(data);

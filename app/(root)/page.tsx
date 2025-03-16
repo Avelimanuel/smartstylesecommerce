@@ -12,7 +12,7 @@ const Homepage = async () => {
   await delay(1000);
   return (
     <>
-      <ProductList data={formattedProducts} title="New Arrivals" limit={4} />
+      <ProductList data={formattedProducts} title="New Arrivals" limit={6} />
     </>
   );
 };
